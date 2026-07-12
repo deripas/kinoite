@@ -24,7 +24,7 @@ jobs:
 
       - name: Build
         run: |
-          chmod +x build_files/*.sh
+          find build_files -type f -name '*.sh' -exec chmod +x {} +
           podman build -f Containerfile -t "$IMAGE:latest" .
           TAG="${FEDORA}-6.18-nvidia"
           echo "TAG=$TAG" >> "$GITHUB_ENV"
