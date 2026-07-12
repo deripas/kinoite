@@ -1,0 +1,36 @@
+name: Build kinoite-lts
+on:
+  schedule:
+    - cron: '0 6 * * *' # после ежедневной пересборки akmods upstream'ом (~01:00 UTC)
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  FEDORA: "44"
+  IMAGE: ghcr.io/${{ github.repository_owner }}/kinoite
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | podman login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build
+        run: |
+          chmod +x build_files/*.sh
+          podman build -f Containerfile -t "$IMAGE:latest" .
+          TAG="${FEDORA}-6.18-nvidia"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          podman tag "$IMAGE:latest" "$IMAGE:$TAG"
+
+      - name: Push
+        run: |
+          podman push "$IMAGE:latest"
+          podman push "$IMAGE:$TAG"
