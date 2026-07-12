@@ -26,7 +26,7 @@ Instead, this repository focuses on:
 - keeping the image small, understandable and easy to modify;
 - experimenting with different kernels and hardware configurations.
 
-## Build
+## Build local
 
 ``` bash
 podman build -t kinoite .
@@ -39,4 +39,10 @@ Aurora and Bazzite are excellent projects, but they target a much broader audien
 For learning purposes, I wanted a smaller project built directly on top of the official Fedora Kinoite image while reusing the published uBlue akmods images for kernel and NVIDIA support.
 
 The goal is to understand the bootc ecosystem rather than maintain another Fedora remix.
+
+## Usage
+
+```bash
+sudo bootc switch ghcr.io/deripas/kinoite:44-6.18-nvidia
+```
 
