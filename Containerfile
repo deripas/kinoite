@@ -18,4 +18,5 @@ RUN --mount=type=tmpfs,dst=/boot \
     /ctx/base/01-nvidia.sh && \
     /ctx/base/02-initramfs.sh
 
-RUN ostree container commit
+RUN --mount=type=tmpfs,dst=/run \
+    bootc container lint
