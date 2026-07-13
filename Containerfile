@@ -15,7 +15,7 @@ RUN --mount=type=tmpfs,dst=/boot \
     --mount=type=bind,from=akmods-nvidia,src=/kernel-rpms,dst=/tmp/kernel-rpms \
     --mount=type=bind,from=akmods-nvidia,src=/rpms,dst=/tmp/akmods-rpms \
     /ctx/base/00-kernel.sh && \
-#    /ctx/base/01-nvidia.sh && \
+    /ctx/base/01-nvidia.sh && \
     /ctx/base/02-initramfs.sh
 
 RUN --mount=type=tmpfs,dst=/run \
