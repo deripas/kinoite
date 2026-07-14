@@ -1,4 +1,4 @@
-# Kinoite
+# Kinoite (NOT production ready)
 
 Custom Fedora Kinoite bootc image built on top of the official Fedora Kinoite image.
 
